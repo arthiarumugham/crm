@@ -1,5 +1,5 @@
 """
-WSGI config for crm project.
+WSGI config for crm1.1 project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
