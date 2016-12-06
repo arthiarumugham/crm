@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block page_title %}Fill the below details to create a new Ticket{% endblock %}
+{% block page_bodyblock %}
+	<div class="row col-sm-6">
+		<form class="form" method="post" action="{% url 'create_ticket' %}">
+		    {% csrf_token %}
+		    <div class="form-group">
+				<label for="id_ticket_name">Ticket Identifier</label>
+				<input name="name" class="form-control" id="id_ticket_name"  type="text" value="{{ form.name.value|default_if_none:"" }}" placeholder="Enter here" />
+			</div>
+			<div class="form-group">
+				<label for="id_ticket_description">Enter a short description </label>
+				<input name="description" class="form-control" id="id_ticket_description" type="text" value="{{ form.description.value|default_if_none:"" }}" placeholder="Enter here" />
+			</div>
+		    <div class="form-group">
+				<label for="id_priority_select">Select your priority </label>
+				<select name="priority" class="form-control" id="id_priority_select">
+				  {% for choice in form.priority.field.choices %}	
+					<option value={{choice.0}}>{{choice.1}}</option>
+				  {% endfor %}			
+				</select>
+			<div class="form-group">
+				<label for="id_customer">Raised by</label>
+					<select name="raised_by" class="form-control" id="id_customer">
+					{% for choice in form.raised_by.field.choices %}
+						<option value={{choice.0}}>{{choice.1}}</option>
+					{% endfor %}
+					</select>
+			</div>
+			<div class="form-group">
+				<label for="id_employees"> Assign To </label>
+					<select name="assigned_to" class="form-control" id="id_employees">
+					{% for choice in form.assigned_to.field.choices %}
+						<option value={{choice.0}}>{{choice.1}}</option>
+					{% endfor %}
+					</select>
+			</div>
+			<button type="submit" class="btn btn-md btn-primary">Proceed</button>
+		</form>
+	</div>
+{% endblock %}
